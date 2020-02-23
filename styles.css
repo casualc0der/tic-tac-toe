@@ -1,3 +1,8 @@
+.mainView {
+
+    width: 400px;
+}
+
 #playRender {
 
     height: 400px;
@@ -19,4 +24,50 @@
     border-width: 1px;
     cursor: pointer;
  
+}
+
+.playerScores {
+    margin-top: 10px;
+    height: 100px;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+}
+
+#player1Name {
+
+    height: 100%;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    border: solid;
+    border-width: 1px;
+}
+
+#player1Score {
+    height: 100%;
+    grid-row-start: 3;
+    grid-column-start: 1;
+    border: solid; 
+    border-width: 1px;
+}
+
+#player2Name {
+
+    height: 100%;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    border: solid;
+    border-width: 1px;
+}
+
+#player2Score {
+    height: 100%;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    border: solid;   
+    border-width: 1px;
 }

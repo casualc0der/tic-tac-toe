@@ -47,12 +47,30 @@ let displayController = (() => {
         }
         
     }
-        return {reRender: reRender}
+
+    let scoreBoard = () => {
+
+        let player1Name = document.getElementById('player1Name')
+        let player2Name = document.getElementById('player2Name')
+        let player1Score = document.getElementById('player1Score')
+        let player2Score = document.getElementById('player2Score')
+    
+        player1Name.innerHTML = player1.name;
+        player2Name.innerHTML = player2.name;
+        player1Score.innerHTML = player1.score;
+        player2Score.innerHTML = player2.score;
+    
+    
+    }   
+
+        return {reRender: reRender, scoreBoard: scoreBoard}
 
 })();
 
 
 let gameLogic = (() => {
+
+    
 
     let currentPlayer = () => {
         let playa = null;
@@ -82,10 +100,12 @@ let gameLogic = (() => {
             
             if (winCheck === 'p1') {
                 alert(`${player1.name} wins!`)
+                player1.score++
                 location.reload();
             }
             else if(winCheck === 'p2') {
                 alert(`${player2.name} wins!`)
+                player2.score++
                 location.reload();
             }
             else if(winCheck === 'tie') {
@@ -99,9 +119,9 @@ let gameLogic = (() => {
     return {switchPlayer:switchPlayer}
 })();
 
-let player = (name, isCurrentPlayer, symbol) => {
+let player = (name, isCurrentPlayer, symbol, score) => {
 
-    return {name:name, isCurrentPlayer:isCurrentPlayer, symbol:symbol}
+    return {name:name, isCurrentPlayer:isCurrentPlayer, symbol:symbol, score:score}
 
 }
 
@@ -177,10 +197,11 @@ function hasAPlayerWon(array, p1, p2) {
 }
 
 
-//fill these in via a form
-let player1 = player('Edd', true, 'x')
-let player2 = player('Tom', false, 'o')
 
+//fill these in via a form
+let player1 = player('Edd', true, 'x', 0)
+let player2 = player('Tom', false, 'o', 0)
+displayController.scoreBoard();
 
 
 
