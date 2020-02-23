@@ -81,11 +81,11 @@ let gameLogic = (() => {
             let winCheck = hasAPlayerWon(gameBoard.gameBoardDisplay(), player1.symbol, player2.symbol);
             
             if (winCheck === 'p1') {
-                alert('player 1 wins!')
+                alert(`${player1.name} wins!`)
                 location.reload();
             }
             else if(winCheck === 'p2') {
-                alert('player 2 wins!')
+                alert(`${player2.name} wins!`)
                 location.reload();
             }
             else if(winCheck === 'tie') {
@@ -180,6 +180,7 @@ function hasAPlayerWon(array, p1, p2) {
 //fill these in via a form
 let player1 = player('Edd', true, 'x')
 let player2 = player('Tom', false, 'o')
+
 
 
 
