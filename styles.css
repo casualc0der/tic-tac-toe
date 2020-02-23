@@ -1,0 +1,20 @@
+#playRender {
+
+    height: 200px;
+    width: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+}
+
+.playSquares {
+
+    height: 100%;
+    width: 100%;
+    font-size: xx-large;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+ 
+}
