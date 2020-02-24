@@ -27,19 +27,29 @@
 }
 
 .playerScores {
+    font-size: 2em;
     margin-top: 10px;
     height: 100px;
     width: 100%;
-    border: solid;
-    border-width: 1px;
+    /* border: solid;
+    border-width: 1px; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    font-family: 'Courier New', Courier, monospace;
 
 }
 
 #player1Name {
-
+    text-align: center;
+    height: 100%;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    border: solid;
+    border-width: 1px;
+}
+#player1Score {
+    text-align: center;
     height: 100%;
     grid-row-start: 2;
     grid-column-start: 1;
@@ -50,7 +60,16 @@
 
 
 #player2Name {
+    text-align: center;
+    height: 100%;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    border: solid;
+    border-width: 1px;
+}
 
+#player2Score {
+    text-align: center;
     height: 100%;
     grid-row-start: 2;
     grid-column-start: 2;
@@ -58,6 +77,11 @@
     border-width: 1px;
 }
 
+.highlighted {
+
+    background-color: lightseagreen;
+
+}
 .visible {
 
     visibility: visible;

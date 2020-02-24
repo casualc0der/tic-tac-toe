@@ -58,8 +58,6 @@ let displayController = (() => {
             console.log(squares[cell])
             console.table(gameBoard.gameBoardDisplay())
 
-        
-        
     }
 
     let resetBoardRender = () => {
@@ -69,9 +67,39 @@ let displayController = (() => {
         resetSquares.forEach((e) => e.innerHTML = '')
     }
 
+    let updateScores = () => {
+
+        let player1Score = document.getElementById('player1Score')
+        let player2Score = document.getElementById('player2Score')
+
+        player1Score.innerHTML = player1.score;
+        player2Score.innerHTML = player2.score;
+    
+    }
+
+    let turnHighlighter = () => {
+
+        let player1Name = document.getElementById('player1Name')
+        let player2Name = document.getElementById('player2Name')
+
+        if(player1.isCurrentPlayer) {
+            player1Name.classList.add('highlighted')
+            player2Name.classList.remove('highlighted')
+        }
+        else if (player2.isCurrentPlayer){
+            player2Name.classList.add('highlighted')
+            player1Name.classList.remove('highlighted')
+        }
+    }
+
  
 
-        return {reRender: reRender, resetBoardRender:resetBoardRender}
+        return { reRender: reRender,
+                 resetBoardRender:resetBoardRender,
+                 updateScores:updateScores,
+                 turnHighlighter: turnHighlighter
+            
+            }
 
 })();
 
@@ -107,6 +135,7 @@ let gameLogic = (() => {
 
     let squares = document.querySelectorAll('.playSquares')
 
+
     squares.forEach((e) =>  {
         e.addEventListener('click', ()=> {
 
@@ -114,22 +143,25 @@ let gameLogic = (() => {
             console.log(`p2 is current player: ${player2.isCurrentPlayer}`)
 
             gameBoard.updatePlayState(currentPlayer(),e.id)
+            displayController.turnHighlighter();
             displayController.reRender(e.id);
             //check for winner?
             let winCheck = hasAPlayerWon(gameBoard.gameBoardDisplay(), player1.symbol, player2.symbol);
             
             if (winCheck === 'p1') {
-                alert(`${player1.name} wins!`)
+                // alert(`${player1.name} wins!`)
                 player1.score++
                 gameBoard.resetBoard();
                 displayController.resetBoardRender();
+                displayController.updateScores();
                 // location.reload();
             }
             else if(winCheck === 'p2') {
-                alert(`${player2.name} wins!`)
+                // alert(`${player2.name} wins!`)
                 player2.score++
                 gameBoard.resetBoard();
                 displayController.resetBoardRender();
+                displayController.updateScores();
                 // location.reload();
             }
             else if(winCheck === 'tie') {
@@ -164,12 +196,17 @@ let gameStart = (() => {
     playButton.addEventListener('click', () => gameStart());
 
     let gameStart = () => {
+
+    
+
         player1 = player(p1NameInput.value, true, 'x', 0)
         player2 = player(p2NameInput.value, false, 'o', 0)
         playForm.classList.add('hidden')
         p1NameDisplay.innerHTML = player1.name;
         p2NameDisplay.innerHTML = player2.name;
-        mainView.classList.remove('hidden');   
+        mainView.classList.remove('hidden');
+        displayController.updateScores();
+        displayController.turnHighlighter();  
     }
 
 
