@@ -2,6 +2,7 @@ body {
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+   
 }
 .titles {
     font-family: 'Courier New', Courier, monospace;
@@ -27,6 +28,8 @@ body {
     background-repeat: no-repeat;
     margin-left: 50px;
 }
+
+
 #mainView {
     grid-row-start: 2;
     grid-column-start: 2;
