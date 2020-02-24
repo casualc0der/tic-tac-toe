@@ -1,4 +1,4 @@
-.mainView {
+#mainView {
 
     width: 400px;
 }
@@ -41,33 +41,32 @@
 #player1Name {
 
     height: 100%;
-    grid-row-start: 1;
+    grid-row-start: 2;
     grid-column-start: 1;
     border: solid;
     border-width: 1px;
 }
 
-#player1Score {
-    height: 100%;
-    grid-row-start: 3;
-    grid-column-start: 1;
-    border: solid; 
-    border-width: 1px;
-}
+
 
 #player2Name {
 
     height: 100%;
-    grid-row-start: 1;
+    grid-row-start: 2;
     grid-column-start: 2;
     border: solid;
     border-width: 1px;
 }
 
-#player2Score {
-    height: 100%;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    border: solid;   
-    border-width: 1px;
+.visible {
+
+    visibility: visible;
+
 }
+
+.hidden {
+
+visibility: hidden;
+
+}
+

@@ -1,3 +1,6 @@
+
+let player1, player2; 
+
 let gameBoard =(() => {
 
     let gameboard = ['','','','','','','','','']
@@ -8,21 +11,35 @@ let gameBoard =(() => {
             }
             else {
                 gameboard[square] = symbol;
+                console.log(gameboard[square])
                 gameLogic.switchPlayer();
             }
 
             
     }
-    let gameBoardDisplay = ()=> gameboard
+    let gameBoardDisplay = () => gameboard
+
+    let resetBoard = () => {
+
+        gameboard = ['','','','','','','','','']
+
+    }
+    
 
     return { updatePlayState:updatePlayState,
-             gameBoardDisplay:gameBoardDisplay }
+             gameBoardDisplay:gameBoardDisplay,
+             resetBoard: resetBoard }
 })();
 
 let displayController = (() => {
-
+    
+   
+ 
     let playArea = document.getElementById('playRender')
+
     let squares = gameBoard.gameBoardDisplay()
+  
+
     let i = 0;
 
     squares.forEach((e) => {
@@ -36,34 +53,25 @@ let displayController = (() => {
 
     let reRender = (cell) => {
         let cellID = document.getElementById(`${cell}`)
-        if(squares[cell] === '') {
-
-            return;
-
-        }
-        else {
+            squares = gameBoard.gameBoardDisplay()
             cellID.innerHTML = squares[cell]
+            console.log(squares[cell])
+            console.table(gameBoard.gameBoardDisplay())
 
-        }
+        
         
     }
 
-    let scoreBoard = () => {
+    let resetBoardRender = () => {
 
-        let player1Name = document.getElementById('player1Name')
-        let player2Name = document.getElementById('player2Name')
-        let player1Score = document.getElementById('player1Score')
-        let player2Score = document.getElementById('player2Score')
-    
-        player1Name.innerHTML = player1.name;
-        player2Name.innerHTML = player2.name;
-        player1Score.innerHTML = player1.score;
-        player2Score.innerHTML = player2.score;
-    
-    
-    }   
+        let resetSquares = document.querySelectorAll('.playSquares')
 
-        return {reRender: reRender, scoreBoard: scoreBoard}
+        resetSquares.forEach((e) => e.innerHTML = '')
+    }
+
+ 
+
+        return {reRender: reRender, resetBoardRender:resetBoardRender}
 
 })();
 
@@ -74,7 +82,14 @@ let gameLogic = (() => {
 
     let currentPlayer = () => {
         let playa = null;
-        player1.isCurrentPlayer === true ? playa = player1: playa = player2
+        if (player1.isCurrentPlayer){
+            playa = player1;
+        }
+        else if(player2.isCurrentPlayer)
+        {
+            playa = player2;
+        }
+
         return playa.symbol;
     }
 
@@ -82,9 +97,11 @@ let gameLogic = (() => {
 
         if(player1.isCurrentPlayer === true) {
             player1.isCurrentPlayer = false
+            player2.isCurrentPlayer = true
         }
         else {
             player1.isCurrentPlayer = true
+            player2.isCurrentPlayer = false
         }
     }
 
@@ -92,6 +109,9 @@ let gameLogic = (() => {
 
     squares.forEach((e) =>  {
         e.addEventListener('click', ()=> {
+
+            console.log(`p1 is current player: ${player1.isCurrentPlayer}`)
+            console.log(`p2 is current player: ${player2.isCurrentPlayer}`)
 
             gameBoard.updatePlayState(currentPlayer(),e.id)
             displayController.reRender(e.id);
@@ -101,18 +121,24 @@ let gameLogic = (() => {
             if (winCheck === 'p1') {
                 alert(`${player1.name} wins!`)
                 player1.score++
-                location.reload();
+                gameBoard.resetBoard();
+                displayController.resetBoardRender();
+                // location.reload();
             }
             else if(winCheck === 'p2') {
                 alert(`${player2.name} wins!`)
                 player2.score++
-                location.reload();
+                gameBoard.resetBoard();
+                displayController.resetBoardRender();
+                // location.reload();
             }
             else if(winCheck === 'tie') {
                 alert('its a tie!')
-                location.reload();
+                gameBoard.resetBoard();
+                displayController.resetBoardRender();
+                // location.reload();
             }
-            console.table(gameBoard.gameBoardDisplay())
+            // console.table(gameBoard.gameBoardDisplay())
         })
     })
 
@@ -125,6 +151,33 @@ let player = (name, isCurrentPlayer, symbol, score) => {
 
 }
 
+let gameStart = (() => {
+    
+    let mainView = document.getElementById('mainView')
+    let playButton  = document.getElementById('playButton')
+    let p1NameInput = document.getElementById('p1')
+    let p2NameInput = document.getElementById('p2')
+    let p1NameDisplay = document.getElementById('player1Name')
+    let p2NameDisplay = document.getElementById('player2Name')
+    let playForm = document.getElementById('playerForm')
+
+    playButton.addEventListener('click', () => gameStart());
+
+    let gameStart = () => {
+        player1 = player(p1NameInput.value, true, 'x', 0)
+        player2 = player(p2NameInput.value, false, 'o', 0)
+        playForm.classList.add('hidden')
+        p1NameDisplay.innerHTML = player1.name;
+        p2NameDisplay.innerHTML = player2.name;
+        mainView.classList.remove('hidden');   
+    }
+
+
+
+
+})();
+
+//this needs to be refactored!
 function hasAPlayerWon(array, p1, p2) {
 
     //win vertical indexes
@@ -198,10 +251,6 @@ function hasAPlayerWon(array, p1, p2) {
 
 
 
-//fill these in via a form
-let player1 = player('Edd', true, 'x', 0)
-let player2 = player('Tom', false, 'o', 0)
-displayController.scoreBoard();
 
 
 

@@ -12,16 +12,20 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-
-        <div class="mainView">
+        <div id="playerForm" class="visible"> 
+            <input id="p1" type="text" maxlength="30" placeholder="P1 Name">
+            <input id="p2" type="text" maxlength="30" placeholder="P2 Name">
+            <button id="playButton">Play!</button>
+        </div>
+        <div id="mainView" class="hidden">
             <div id="playRender">
                 
             </div>
             <div class="playerScores">  
                 <div id="player1Name"></div>
-                <div id="player1Score"></div>
+                <!-- <div id="player1Score"></div> -->
                 <div id="player2Name"></div>
-                <div id="player2Score"></div>
+                <!-- <div id="player2Score"></div> -->
                 
             </div>
 
