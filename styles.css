@@ -1,6 +1,13 @@
+
+.titles {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+
+}
 #mainView {
 
     width: 400px;
+ 
 }
 
 #playRender {
@@ -90,7 +97,17 @@
 
 .hidden {
 
-visibility: hidden;
+pointer-events: none;
 
+}
+
+.invisible {
+
+    visibility: hidden;
+}
+
+.winner {
+
+    background-color: lightseagreen;
 }
 

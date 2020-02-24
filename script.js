@@ -151,8 +151,8 @@ let gameLogic = (() => {
             if (winCheck === 'p1') {
                 // alert(`${player1.name} wins!`)
                 player1.score++
-                gameBoard.resetBoard();
-                displayController.resetBoardRender();
+                 gameBoard.resetBoard();
+                 displayController.resetBoardRender();
                 displayController.updateScores();
                 // location.reload();
             }
@@ -197,11 +197,19 @@ let gameStart = (() => {
 
     let gameStart = () => {
 
-    
+        let nameFinal1 = p1NameInput.value;
+        let nameFinal2 = p2NameInput.value;
 
-        player1 = player(p1NameInput.value, true, 'x', 0)
-        player2 = player(p2NameInput.value, false, 'o', 0)
-        playForm.classList.add('hidden')
+        if(nameFinal1 === '') {
+            nameFinal1 = 'X'
+        }
+        if(nameFinal2 === '') {
+            nameFinal2 = 'O'
+        }
+
+        player1 = player(nameFinal1, true, 'x', 0)
+        player2 = player(nameFinal2, false, 'o', 0)
+        playForm.classList.add('invisible')
         p1NameDisplay.innerHTML = player1.name;
         p2NameDisplay.innerHTML = player2.name;
         mainView.classList.remove('hidden');
