@@ -92,12 +92,57 @@ let displayController = (() => {
         }
     }
 
+    let playAgainToggle = (name) => {
+        let squares = document.querySelectorAll('.playSquares');
+        let restartButton = document.getElementById('restart');
+        let refreshButton = document.getElementById('refresh');
+        let winnerTitle = document.getElementById('resultOfGame');
+
+        restartButton.classList.remove('invisible');
+        restartButton.classList.add('visible');
+        refreshButton.classList.remove('invisible');
+        refreshButton.classList.add('visible');
+
+        if(name === undefined) {
+            winnerTitle.innerHTML = `It's a tie!`;
+        }
+        else {
+            winnerTitle.innerHTML = `${name} wins!`;
+        }
+      
+        winnerTitle.classList.remove('invisible')
+
+
+        refreshButton.addEventListener('click', ()=> location.reload())
+        squares.forEach((e) => e.classList.add('hidden'));
+
+        restartButton.addEventListener('click', ()=> {
+            gameBoard.resetBoard();
+            displayController.resetBoardRender();
+            winnerTitle.classList.add('invisible')
+            refreshButton.classList.add('invisible');
+            restartButton.classList.add('invisible');
+            squares.forEach((e) => e.classList.remove('hidden'));
+
+        })
+         }
+
+
+        
+            
+
+
+
+        
+    
+
  
 
         return { reRender: reRender,
                  resetBoardRender:resetBoardRender,
                  updateScores:updateScores,
-                 turnHighlighter: turnHighlighter
+                 turnHighlighter: turnHighlighter, 
+                 playAgainToggle:playAgainToggle
             
             }
 
@@ -151,23 +196,19 @@ let gameLogic = (() => {
             if (winCheck === 'p1') {
                 // alert(`${player1.name} wins!`)
                 player1.score++
-                 gameBoard.resetBoard();
-                 displayController.resetBoardRender();
                 displayController.updateScores();
-                // location.reload();
+                displayController.playAgainToggle(player1.name);
+     
             }
             else if(winCheck === 'p2') {
                 // alert(`${player2.name} wins!`)
                 player2.score++
-                gameBoard.resetBoard();
-                displayController.resetBoardRender();
                 displayController.updateScores();
-                // location.reload();
+                displayController.playAgainToggle(player2.name);
+
             }
             else if(winCheck === 'tie') {
-                alert('its a tie!')
-                gameBoard.resetBoard();
-                displayController.resetBoardRender();
+            displayController.playAgainToggle();
                 // location.reload();
             }
             // console.table(gameBoard.gameBoardDisplay())
@@ -187,12 +228,13 @@ let gameStart = (() => {
     
     let mainView = document.getElementById('mainView')
     let playButton  = document.getElementById('playButton')
+    let playRender = document.getElementById('playRender')
     let p1NameInput = document.getElementById('p1')
     let p2NameInput = document.getElementById('p2')
     let p1NameDisplay = document.getElementById('player1Name')
     let p2NameDisplay = document.getElementById('player2Name')
     let playForm = document.getElementById('playerForm')
-
+    let titles = document.querySelectorAll('.titles')
     playButton.addEventListener('click', () => gameStart());
 
     let gameStart = () => {
@@ -210,9 +252,11 @@ let gameStart = (() => {
         player1 = player(nameFinal1, true, 'x', 0)
         player2 = player(nameFinal2, false, 'o', 0)
         playForm.classList.add('invisible')
+        titles.forEach((e) => e.classList.add('invisible'))
         p1NameDisplay.innerHTML = player1.name;
         p2NameDisplay.innerHTML = player2.name;
         mainView.classList.remove('hidden');
+        playRender.classList.remove('hidden');
         displayController.updateScores();
         displayController.turnHighlighter();  
     }

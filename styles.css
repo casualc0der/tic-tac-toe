@@ -1,12 +1,38 @@
+body {
 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 .titles {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    grid-row-start: 1;
+    grid-column-start: 2;
 
 }
-#mainView {
 
-    width: 400px;
+#resultOfGame {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    grid-row-start: 1;
+    grid-column-start: 2;
+
+}
+
+#refresh {
+    align-content: center;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    background-image: url('refreshIcon.png');
+    background-repeat: no-repeat;
+    margin-left: 50px;
+}
+#mainView {
+    grid-row-start: 2;
+    grid-column-start: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 1fr 1fr;
  
 }
 
@@ -14,6 +40,9 @@
 
     height: 400px;
     width: 400px;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -37,14 +66,64 @@
     font-size: 2em;
     margin-top: 10px;
     height: 100px;
-    width: 100%;
+    width: 400px;
+    grid-row-start: 3;
+    grid-column-start: 2;
     /* border: solid;
     border-width: 1px; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    
     font-family: 'Courier New', Courier, monospace;
 
+}
+
+#playerForm {
+    width: 400px;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    align-content: center;
+    margin-bottom: 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+}
+
+#p1 {
+    float: left;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    height: 20px;
+    font-size: large;
+    grid-row-start: 1;
+    grid-column-start: 1;
+
+}
+
+#p2 {
+    float: right;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    height: 20px;
+    font-size: large;
+    grid-row-start: 1;
+    grid-column-start: 3;
+}
+
+button {
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    border-style: hidden;
+    font-size: x-large;
+    outline: none;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    cursor: pointer;
+    /* padding: 20px; */
 }
 
 #player1Name {

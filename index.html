@@ -12,15 +12,22 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <h1 id="resultOfGame" class="invisible"></h1>
         <h1 class="titles">Tic Tac Toe</h1>
-        <h6 class="titles">Click play to get started!</h6>
-        <div id="playerForm" class="visible"> 
-            <input id="p1" type="text" maxlength="9" placeholder="P1 Name">
-            <input id="p2" type="text" maxlength="9" placeholder="P2 Name">
-            <button id="playButton">Play!</button>
-        </div>
-        <div id="mainView" class="hidden">
-            <div id="playRender">
+  
+        <div id="mainView">
+
+            <div id="playerForm" class="visible"> 
+                <input id="p1" type="text" maxlength="9" placeholder="P1 Name">
+                <input id="p2" type="text" maxlength="9" placeholder="P2 Name">
+                <br>
+                <button id="playButton">Play</button>
+                <button id="restart" class="invisible">Next Game</button>
+                <button id="refresh" class="invisible"></button>
+
+            </div>
+            
+            <div id="playRender" class="hidden">
                 
             </div>
             <div class="playerScores">  
