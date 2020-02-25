@@ -5,6 +5,6 @@
 
 ## Tools used: 
 
-...*HTML
-...*CSS (GRID) :black_square_button:
-...*Vanilla JS
+* HTML
+* CSS (GRID) :black_square_button:
+* Vanilla JS
