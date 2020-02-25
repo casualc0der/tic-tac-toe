@@ -1,12 +1,11 @@
 # Tic-Tac-Toe
 
-## Minimal Styling
-## 2 players
+### Minimal Styling
+### 2 players
 
-## Tools used: 
+### Tools used: 
 
 * HTML
 * CSS (GRID) :black_square_button:
 * Vanilla JS
-
-Preview [here](https://casualc0der.github.io/tic-tac-toe/)
+* Preview [here](https://casualc0der.github.io/tic-tac-toe/)
