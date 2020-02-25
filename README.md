@@ -1,7 +1,7 @@
 # Tic-Tac-Toe
 
-### Minimal Styling
-### 2 players
+### Minimal Styling.
+### A game for 2 players
 
 ### Tools used: 
 
