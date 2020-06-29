@@ -1,10 +1,7 @@
 
 let player1, player2; 
-
 let gameBoard =(() => {
-
     let gameboard = ['','','','','','','','','']
-
     let updatePlayState = (symbol, square) => {
             if(gameboard[square] !== ''){
                 return;
@@ -14,15 +11,11 @@ let gameBoard =(() => {
           
                 gameLogic.switchPlayer();
             }
-
-            
     }
     let gameBoardDisplay = () => gameboard
 
     let resetBoard = () => {
-
         gameboard = ['','','','','','','','','']
-
     }
     
 
@@ -32,16 +25,9 @@ let gameBoard =(() => {
 })();
 
 let displayController = (() => {
-    
-   
- 
     let playArea = document.getElementById('playRender')
-
     let squares = gameBoard.gameBoardDisplay()
-  
-
     let i = 0;
-
     squares.forEach((e) => {
         let square = document.createElement('div');
         square.classList= 'playSquares'
@@ -55,25 +41,18 @@ let displayController = (() => {
         let cellID = document.getElementById(`${cell}`)
             squares = gameBoard.gameBoardDisplay()
             cellID.innerHTML = squares[cell]
-          
-
     }
 
     let resetBoardRender = () => {
-
         let resetSquares = document.querySelectorAll('.playSquares')
-
         resetSquares.forEach((e) => e.innerHTML = '')
     }
 
     let updateScores = () => {
-
         let player1Score = document.getElementById('player1Score')
         let player2Score = document.getElementById('player2Score')
-
         player1Score.innerHTML = player1.score;
         player2Score.innerHTML = player2.score;
-    
     }
 
     let turnHighlighter = () => {
@@ -110,11 +89,8 @@ let displayController = (() => {
         }
       
         winnerTitle.classList.remove('invisible')
-
-
         refreshButton.addEventListener('click', ()=> location.reload())
         squares.forEach((e) => e.classList.add('hidden'));
-
         restartButton.addEventListener('click', ()=> {
             gameBoard.resetBoard();
             displayController.resetBoardRender();
@@ -125,33 +101,17 @@ let displayController = (() => {
 
         })
          }
-
-
-        
-            
-
-
-
-        
-    
-
- 
-
         return { reRender: reRender,
                  resetBoardRender:resetBoardRender,
                  updateScores:updateScores,
                  turnHighlighter: turnHighlighter, 
                  playAgainToggle:playAgainToggle
-            
             }
 
 })();
 
 
 let gameLogic = (() => {
-
-    
-
     let currentPlayer = () => {
         let playa = null;
         if (player1.isCurrentPlayer){
@@ -178,8 +138,6 @@ let gameLogic = (() => {
     }
 
     let squares = document.querySelectorAll('.playSquares')
-
-
     squares.forEach((e) =>  {
         e.addEventListener('click', ()=> {
 
@@ -208,9 +166,7 @@ let gameLogic = (() => {
             }
             else if(winCheck === 'tie') {
             displayController.playAgainToggle();
-                // location.reload();
             }
-            // console.table(gameBoard.gameBoardDisplay())
         })
     })
 
@@ -218,13 +174,10 @@ let gameLogic = (() => {
 })();
 
 let player = (name, isCurrentPlayer, symbol, score) => {
-
     return {name:name, isCurrentPlayer:isCurrentPlayer, symbol:symbol, score:score}
-
 }
 
 let gameStart = (() => {
-    
     let mainView = document.getElementById('mainView')
     let playButton  = document.getElementById('playButton')
     let playRender = document.getElementById('playRender')
@@ -259,15 +212,10 @@ let gameStart = (() => {
         displayController.updateScores();
         displayController.turnHighlighter();  
     }
-
-
-
-
 })();
 
-//this needs to be refactored!
-function hasAPlayerWon(squares) {
 
+function hasAPlayerWon(squares) {
     const winningCombos = [
         [0,3,6],
         [1,4,7],
@@ -293,6 +241,3 @@ function hasAPlayerWon(squares) {
       }
       return null;
     }
-
-
-
