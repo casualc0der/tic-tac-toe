@@ -11,7 +11,7 @@ let gameBoard =(() => {
             }
             else {
                 gameboard[square] = symbol;
-                console.log(gameboard[square])
+          
                 gameLogic.switchPlayer();
             }
 
@@ -55,8 +55,7 @@ let displayController = (() => {
         let cellID = document.getElementById(`${cell}`)
             squares = gameBoard.gameBoardDisplay()
             cellID.innerHTML = squares[cell]
-            console.log(squares[cell])
-            console.table(gameBoard.gameBoardDisplay())
+          
 
     }
 
@@ -193,14 +192,14 @@ let gameLogic = (() => {
             //check for winner?
             let winCheck = hasAPlayerWon(gameBoard.gameBoardDisplay(), player1.symbol, player2.symbol);
             
-            if (winCheck === 'p1') {
+            if (winCheck === 'x') {
                 // alert(`${player1.name} wins!`)
                 player1.score++
                 displayController.updateScores();
                 displayController.playAgainToggle(player1.name);
      
             }
-            else if(winCheck === 'p2') {
+            else if(winCheck === 'o') {
                 // alert(`${player2.name} wins!`)
                 player2.score++
                 displayController.updateScores();
@@ -267,84 +266,33 @@ let gameStart = (() => {
 })();
 
 //this needs to be refactored!
-function hasAPlayerWon(array, p1, p2) {
+function hasAPlayerWon(squares) {
 
-    //win vertical indexes
-    //0,3,6
-    if(array[0] === p1 && array[3] === p1 && array[6]===p1){
-        return 'p1'
-    }
-    if(array[0] === p2 && array[3] === p2 && array[6]===p2){
-        return 'p2'
-    }
-    //1,4,7
-    if(array[1] === p1 && array[4] === p1 && array[7]===p1){
-        return 'p1'
-    }
-    if(array[1] === p2 && array[4] === p2 && array[7]===p2){
-        return 'p2'
-    }
-    //2,5,8
-    if(array[2] === p1 && array[5] === p1 && array[8]===p1){
-        return 'p1'
-    }
-    if(array[2] === p2 && array[5] === p2 && array[8]===p2){
-        return 'p2'
-    }
-    // win horizontal indexes
-    //0,1,2
-    if(array[0] === p1 && array[1] === p1 && array[2]===p1){
-        return 'p1'
-    }
-    if(array[0] === p2 && array[1] === p2 && array[2]===p2){
-        return 'p2'
-    }
-    //3,4,5
-    if(array[3] === p1 && array[4] === p1 && array[5]===p1){
-        return 'p1'
-    }
-    if(array[3] === p2 && array[4] === p2 && array[5]===p2){
-        return 'p2'
-    }
-    //6,7,8
-    if(array[6] === p1 && array[7] === p1 && array[8]===p1){
-        return 'p1'
-    }
-    if(array[6] === p2 && array[7] === p2 && array[8]===p2){
-        return 'p2'
-    }
-    //win diagonally indexes 
-    //0,4,8
-    if(array[0] === p1 && array[4] === p1 && array[8]===p1){
-        return 'p1'
-    }
-    if(array[0] === p2 && array[4] === p2 && array[8]===p2){
-        return 'p2'
-    }
-    //2,4,6
-    if(array[2] === p1 && array[4] === p1 && array[6]===p1){
-        return 'p1'
-    }
-    if(array[2] === p2 && array[4] === p2 && array[6]===p2){
-        return 'p2'
-    }
-    //tie
-    const tie = array.includes('');
+    const winningCombos = [
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,4,8],
+        [2,4,6],
+    ]
 
-    if(!tie) {
+    const blankTiles = squares.includes('');
+    if(!blankTiles) {
         return 'tie';
     }
-
-
-}
-
-
-
-
-
-
-
-
+    
+    for (let i = 0; i < winningCombos.length; i++) {
+        const [a, b, c] = winningCombos[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            console.log(squares[a])
+            return squares[a];
+        }
+      }
+      return null;
+    }
 
 
 
